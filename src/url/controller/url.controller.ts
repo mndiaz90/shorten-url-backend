@@ -7,7 +7,6 @@ import {
   HttpCode,
   HttpStatus,
   Delete,
-  Redirect,
 } from '@nestjs/common';
 import { DeleteResult } from 'typeorm';
 import { Url } from '../entity/url.entity';
@@ -29,10 +28,8 @@ export class UrlController {
   }
 
   @Post('visit/:id')
-  @Redirect()
   async visit(@Param('id') id: number): Promise<object> {
-    const url = await this.urlService.visit(id);
-    return { url };
+    return await this.urlService.visit(id);
   }
 
   @Get('stats/:id')

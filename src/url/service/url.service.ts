@@ -20,12 +20,12 @@ export class UrlService {
     return await this.urlRepository.save(url);
   }
 
-  async visit(id: number): Promise<string> {
+  async visit(id: number): Promise<object> {
     const url = await this.urlRepository.findOneBy({
       id,
     });
     this.clickRepository.save({ url });
-    return url.original_url;
+    return { original_url: url.original_url };
   }
 
   async statsById(id: number): Promise<object> {
